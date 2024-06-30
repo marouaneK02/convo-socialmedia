@@ -1,0 +1,12 @@
+import express from "express";
+import { createPost, deletePost, getPost, likeUnlikePost } from "../controllers/postController.js";
+import protectRoute from "../middlewares/protectRoute.js";
+
+const router = express.Router();
+
+router.get("/:id", getPost);
+router.post("/create", protectRoute, createPost);
+router.post("/like/:id", protectRoute, likeUnlikePost);
+router.delete("/:id", protectRoute, deletePost);
+
+export default router;

@@ -2,6 +2,23 @@ import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import generateTokenAndSetCookie from "../utils/helpers/generateTokenAndSetCookie.js";
 
+const getUserProfile = async(req,res) => {
+    try {
+        const { username } = req.params;
+        const user = await User.findOne({username}).select("-password").select("-updatedAt");
+
+        if(!user){
+            res.status(404).json({ message: "User not found." });
+        }
+
+        res.status(200).json(user);
+
+    } catch (err) {
+        res.status(500).json({ message:err.message });
+        console.log("Error in getUserProfile: ", err.message);
+    }
+};
+
 const signupUser = async(req,res) => {
     try {
         const {name, email, username, password} = req.body;
@@ -91,7 +108,7 @@ const followUnfollowUser = async(req,res) => {
         };
 
         if(!userToUpdate || !currentUser){
-            res.status(400).json({ message: "User not found." });
+            res.status(404).json({ message: "User not found." });
         };
 
         const isFollowing = currentUser.following.includes(id);
@@ -121,7 +138,7 @@ const updateUser = async(req,res) => {
         let user = await User.findById(userId);
 
         if(!user){
-            res.status(400).json({ message: "User not found." });
+            res.status(404).json({ message: "User not found." });
         };
 
         if(req.params.id !== userId.toString()){
@@ -149,4 +166,4 @@ const updateUser = async(req,res) => {
     }
 };
 
-export { signupUser, loginUser, logoutUser, followUnfollowUser, updateUser };
+export { signupUser, loginUser, logoutUser, followUnfollowUser, updateUser, getUserProfile };

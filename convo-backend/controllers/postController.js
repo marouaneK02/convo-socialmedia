@@ -17,6 +17,31 @@ const getPost = async(req,res) => {
     }
 };
 
+const getFeedPosts = async(req,res) => {
+    try {
+        const userId = req.user._id;
+        const user = await User.findById(userId);
+
+        if(!user){
+            res.status(404).json({ message: "User not found." });
+        };
+
+        const following = user.following;
+
+        const feedPosts = await Post.find({
+            postedBy: { $in:following },
+        }).sort({
+            createdAt: -1
+        });
+
+        req.status(200).json({ feedPosts });
+
+    } catch (err) {
+        res.status(500).json({ message:err.message });
+        console.log("Error in getFeedPost: ", err.message);
+    }
+};
+
 const createPost = async(req,res) => {
     try {
         const { postedBy, text, img } = req.body;
@@ -79,6 +104,35 @@ const likeUnlikePost = async(req,res) => {
     }
 };
 
+const replyPost = async(req,res) => {
+    try {
+        const { text } = req.body;
+        const postId = req.params.id;
+        const userId = req.user._id;
+        const userProfilePic = req.user.profilePic;
+        const username = req.username;
+
+        if(!text){
+            res.status(400).json({ message: "Text field is required." });
+        };
+
+        const post = await Post.findById(postId);
+
+        if(!post){
+            res.status(404).json({ message: "Post not found." });
+        };
+
+        const reply = { userId, text, userProfilePic, username };
+        post.reply.push(reply);
+        await post.save();
+        req.status(200).json({ message: "Reply added successfully.", post });
+
+    } catch (err) {
+        res.status(500).json({ message:err.message });
+        console.log("Error in replyPost: ", err.message);
+    }
+};
+
 const deletePost = async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -99,4 +153,4 @@ const deletePost = async(req,res) => {
     }
 };
 
-export { createPost, getPost, likeUnlikePost, deletePost };
+export { createPost, getPost, getFeedPosts, likeUnlikePost, replyPost, deletePost };

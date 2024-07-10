@@ -122,13 +122,13 @@ const followUnfollowUser = async(req,res) => {
         const isFollowing = currentUser.following.includes(id);
 
         if(isFollowing){
-            await User.findByIdAndUpdate(req.user._id, { $pull: { following:id }});
             await User.findByIdAndUpdate(id, { $pull: { followers: req.user._id }});
+            await User.findByIdAndUpdate(req.user._id, { $pull: { following:id }});
             res.status(200).json({ message: "User unfollowed."});
 
         } else{
-            await User.findByIdAndUpdate(req.user._id, { $push: { following:id }});
             await User.findByIdAndUpdate(id, { $push: { followers: req.user._id }});
+            await User.findByIdAndUpdate(req.user._id, { $push: { following:id }});
             res.status(200).json({ message: "User followed."});
         };
 
@@ -139,11 +139,11 @@ const followUnfollowUser = async(req,res) => {
 };
 
 const updateUser = async(req,res) => {
+    const { firstName, lastName, email, username, password, bio } = req.body;
+    let { profilePic } = req.body;
+    const userId = req.user._id;
+    
     try {
-        const { firstName, lastName, email, username, password, bio } = req.body;
-        let { profilePic } = req.body;
-        const userId = req.user._id;
-
         let user = await User.findById(userId);
 
         if(!user){
@@ -178,6 +178,7 @@ const updateUser = async(req,res) => {
 
         user = await user.save();
         user.password = null,
+        
         res.status(200).json(user);
 
     } catch (err) {

@@ -23,12 +23,13 @@ import useShowToast from '../hooks/useShowToast';
 export default function UpdateProfilePage() {
     const [user, setUser] = useRecoilState(userAtom);
     const showToast = useShowToast();
+    const [updating, setUpdating] = useState(false);
     const [inputs, setInputs] = useState({
         firstName: user.firstName,
         lastName: user.lastName,
+        username: user.username,
         email: user.email,
         bio: user.bio,
-        username: user.username,
         password:"",
     });
 
@@ -36,7 +37,13 @@ export default function UpdateProfilePage() {
 
     const { handleImgChange, imgUrl } = usePreviewImg();
     const handleSubmit = async(e) => {
-        e.prevent.default();
+        e.preventDefault();
+
+        if(updating){
+            return;
+        };
+
+        setUpdating(true);
 
         try {
             const res = await fetch(`/api/users/update/${user._id}`, {
@@ -44,7 +51,7 @@ export default function UpdateProfilePage() {
                 headers:{
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ ...inputs, profilePic: imgUrl }),
+                body: JSON.stringify({...inputs, profilePic: imgUrl }),
             });
 
             const data = await res.json();
@@ -60,7 +67,9 @@ export default function UpdateProfilePage() {
 
         } catch (error) {
             showToast("Error", error, "error");
-        }
+        } finally{
+            setUpdating(false);
+        };
     };
 
     return (
@@ -174,6 +183,7 @@ export default function UpdateProfilePage() {
                     _hover={{
                     bg: 'green.600',
                     }}
+                    isLoading={updating}
                     type='submit'>
                     Submit
                 </Button>

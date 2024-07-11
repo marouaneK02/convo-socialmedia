@@ -9,7 +9,7 @@ const getUserProfile = async(req,res) => {
         const user = await User.findOne({username}).select("-password").select("-updatedAt");
 
         if(!user){
-            res.status(404).json({ error: "User not found." });
+            return res.status(404).json({ error: "User not found." });
         }
 
         res.status(200).json(user);
@@ -55,7 +55,7 @@ const signupUser = async(req,res) => {
                 profilePic: newUser.profilePic,
             });
         } else{
-            res.status(400).json({ error: "Invalid user data." });
+            return res.status(400).json({ error: "Invalid user data." });
         };
 
     } catch (err) {
@@ -109,21 +109,21 @@ const followUnfollowUser = async(req,res) => {
     try {
         const { id } = req.params;
         const userToUpdate = await User.findById(id);
-        const currentUser = await User.findById(res.user._id);
+        const currentUser = await User.findById(req.user._id);
 
         if(id === req.user._id.toString()){
-            res.status(400).json({ error: "You cannot follow/unfollow yourself." });
+            return res.status(400).json({ error: "You cannot follow/unfollow yourself." });
         };
 
         if(!userToUpdate || !currentUser){
-            res.status(404).json({ error: "User not found." });
+            return res.status(404).json({ error: "User not found." });
         };
 
         const isFollowing = currentUser.following.includes(id);
 
         if(isFollowing){
             await User.findByIdAndUpdate(id, { $pull: { followers: req.user._id }});
-            await User.findByIdAndUpdate(req.user._id, { $pull: { following:id }});
+            await User.findByIdAndUpdate(req.user._id, { $pull: { following: id }});
             res.status(200).json({ message: "User unfollowed."});
 
         } else{
@@ -147,11 +147,11 @@ const updateUser = async(req,res) => {
         let user = await User.findById(userId);
 
         if(!user){
-            res.status(404).json({ error: "User not found." });
+            return res.status(404).json({ error: "User not found." });
         };
 
         if(req.params.id !== userId.toString()){
-            res.status(400).json({ error: "You cannot update another user's profile." });
+            return res.status(400).json({ error: "You cannot update another user's profile." });
         };
 
         if(password){

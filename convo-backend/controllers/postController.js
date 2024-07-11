@@ -1,12 +1,13 @@
 import User from "../models/userModel.js";
 import Post from "../models/postModel.js";
+import { v2 as cloudinary } from "cloudinary";
 
 const getPost = async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
 
         if(!post){
-            res.status(404).json({ error: "Post not found." });
+            return res.status(404).json({ error: "Post not found." });
         };
 
         req.status(200).json({ post });
@@ -23,7 +24,7 @@ const getFeedPosts = async(req,res) => {
         const user = await User.findById(userId);
 
         if(!user){
-            res.status(404).json({ error: "User not found." });
+            return res.status(404).json({ error: "User not found." });
         };
 
         const following = user.following;
@@ -44,23 +45,30 @@ const getFeedPosts = async(req,res) => {
 
 const createPost = async(req,res) => {
     try {
-        const { postedBy, text, img } = req.body;
+        const { postedBy, text } = req.body;
+        let { img } = req.body;
+        
         if(!postedBy || !text){
-            res.status(400).json({ error: "postedBy and text fields required." });
+            return res.status(400).json({ error: "postedBy and text fields required." });
         };
 
         const user = await User.findById(postedBy);
         if(!user){
-            res.status(404).json({ error: "User not found." });
+            return res.status(404).json({ error: "User not found." });
         };
 
         if(user._id.toString() !== req.user._id.toString()){
-            res.status(401).json({ error: "Unauthorised to post." });
+            return res.status(401).json({ error: "Unauthorised to post." });
         };
 
         const maxLength = 500;
         if(text.length > maxLength){
-            res.status(400).json({ error: `Text must be less than ${maxLength} characters.` });
+            return res.status(400).json({ error: `Text must be less than ${maxLength} characters.` });
+        };
+
+        if(img){
+            const uploadedResponse = await cloudinary.uploader.upload(img);
+            img = uploadedResponse.secure_url;
         };
 
         const newPost = new Post({
@@ -85,7 +93,7 @@ const likeUnlikePost = async(req,res) => {
         const post = await Post.findById(postId);
 
         if(!post){
-            res.status(404).json({ error: "Post not found." });
+            return res.status(404).json({ error: "Post not found." });
         };
 
         const userLikedPost = post.likes.includes(userId);
@@ -113,13 +121,13 @@ const replyPost = async(req,res) => {
         const username = req.username;
 
         if(!text){
-            res.status(400).json({ error: "Text field is required." });
+            return res.status(400).json({ error: "Text field is required." });
         };
 
         const post = await Post.findById(postId);
 
         if(!post){
-            res.status(404).json({ error: "Post not found." });
+            return res.status(404).json({ error: "Post not found." });
         };
 
         const reply = { userId, text, userProfilePic, username };
@@ -137,11 +145,11 @@ const deletePost = async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
         if(!post){
-            res.status(404).json({ error: "Post not found." });
+            return res.status(404).json({ error: "Post not found." });
         };
 
         if(post.postedBy.toString() !== req.user._id.toString()){
-            res.status(401).json({ error: "Unauthorised to delete post." });
+            return res.status(401).json({ error: "Unauthorised to delete post." });
         };
 
         await Post.findByIdAndDelete(req.params.id);

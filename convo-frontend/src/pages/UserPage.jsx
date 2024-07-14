@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import UserHeader from "../components/UserHeader"
-import UserPost from "../components/UserPost"
+import UserHeader from "../components/UserHeader";
 import { useParams } from "react-router-dom";
 import useShowToast from "../hooks/useShowToast";
 import { Flex, Spinner } from "@chakra-ui/react";
+import Post from "../components/Post";
+import postsAtom from "../atoms/postsAtom";
 
 
 const UserPage = () => {
   const [user,setUser] = useState(null);
   const showToast = useShowToast();
   const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState(postsAtom);
+  const [fetchingPosts, setFetchingPosts] = useState(true);
 
   const { username } = useParams();
 
@@ -33,7 +36,24 @@ const UserPage = () => {
       };
     };
 
+    const getPosts = async() => {
+      setFetchingPosts(true);
+      try {
+        const res = await fetch(`/api/posts/user/${username}`);
+        const data = await res.json();
+
+        setPosts(data);
+
+      } catch (error) {
+        showToast("Error", error, "error");
+        setPosts([]);
+      } finally{
+        setFetchingPosts(false);
+      };
+    };
+
     getUser();
+    getPosts();
 
   },[username, showToast]);
 
@@ -52,7 +72,18 @@ const UserPage = () => {
   return (
     <>
       <UserHeader user={user}/>
-      <UserPost/>
+
+      {!fetchingPosts && posts.length === 0 && (
+        <h1>User has not posted yet.</h1>
+      )}
+      {fetchingPosts && (
+        <Flex justifyContent={"center"} my={"12"}>
+          <Spinner size={"xl"}/>
+        </Flex>
+      )}
+      {posts.map((post) => (
+        <Post key={post._id} post={post} postedBy={post.postedBy}/>
+      ))}
     </>
   )
 }

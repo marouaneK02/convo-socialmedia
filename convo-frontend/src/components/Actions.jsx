@@ -53,7 +53,7 @@ const Actions = ({ post }) => {
 			const data = await res.json();
 			if (data.error){
         return showToast("Error", data.error, "error");
-      };
+    };
 
 			if (!liked) {
 				const updatedPosts = posts.map((p) => {

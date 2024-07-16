@@ -78,7 +78,7 @@ const createPost = async(req,res) => {
         });
 
         await newPost.save();
-        res.status(201).json({ message: "Post created successfully." , newPost });
+        res.status(201).json(newPost);
 
     } catch (err) {
         res.status(500).json({ error:err.message });
@@ -133,7 +133,7 @@ const replyPost = async(req,res) => {
         const reply = { userId, text, userProfilePic, username };
         post.replies.push(reply);
         await post.save();
-        res.status(200).json({ message: "Reply added successfully.", post });
+        res.status(200).json(reply);
 
     } catch (err) {
         res.status(500).json({ error:err.message });

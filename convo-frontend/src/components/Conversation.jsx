@@ -1,10 +1,10 @@
 import { Avatar, AvatarBadge, Flex, Image, Stack, Text, useColorMode, useColorModeValue, WrapItem } from '@chakra-ui/react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { userAtom } from "../atoms/userAtom";
 import { BsCheck2All } from "react-icons/bs";
 import { selectedConversationAtom } from '../atoms/conversationsAtom';
+import userAtom from '../atoms/userAtom';
 
-const Conversation = ({ conversation }) => {
+const Conversation = ({ conversation, isOnline }) => {
     const user = conversation.participants[0];
     const currentUser = useRecoilValue(userAtom);
     const lastMessage = conversation.lastMessage;
@@ -22,14 +22,14 @@ const Conversation = ({ conversation }) => {
         username: user.username,
         userProfilePic: user.profilePic,
         mock: conversation.mock,
-    })} bg={selectedConversation?._id === conversation._id ? (colorMode === light ? "gray.600" : "gray.dark") : ""}>
+    })} bg={selectedConversation?._id === conversation._id ? (colorMode === "light" ? "gray.600" : "gray.dark") : ""}>
         <WrapItem>
             <Avatar size={{
                 base:"xs",
                 sm:"sm",
                 md:"md",
             }} src={user.profilePic}>
-                <AvatarBadge boxSize={"1em"} bg={"green.500"}/>
+                {isOnline ? <AvatarBadge boxSize={"1em"} bg={"green.500"}/> : ""}
             </Avatar>
         </WrapItem>
         

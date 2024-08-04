@@ -8,6 +8,10 @@ const conversationSchema = new mongoose.Schema({
     lastMessage:{
         sender: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
         text: String,
+        seen:{
+            type: Boolean,
+            default: false,
+        },
     },
 },{
     timestamps: true,

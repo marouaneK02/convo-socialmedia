@@ -39,7 +39,11 @@ const userSchema = mongoose.Schema({
     bio:{
         type: String,
         default:"",
-    }
+    },
+    isFrozen:{
+        type: Boolean,
+        default: false,
+    },
 },{
     timestamps: true,
 });

@@ -1,11 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { ChakraProvider, extendTheme, ColorModeScript } from '@chakra-ui/react'
-import { mode } from '@chakra-ui/theme-tools'
-import { BrowserRouter } from 'react-router-dom'
-import { RecoilRoot } from 'recoil'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+import { ChakraProvider, extendTheme, ColorModeScript } from '@chakra-ui/react';
+import { mode } from '@chakra-ui/theme-tools';
+import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import { SocketContextProvider } from './context/SocketContext.jsx';
 
 const styles = {
   global:(props) => ({

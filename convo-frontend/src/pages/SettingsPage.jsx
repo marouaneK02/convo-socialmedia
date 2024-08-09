@@ -1,6 +1,8 @@
-import { Button, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import useShowToast from "../hooks/useShowToast";
 import useLogout from "../hooks/useLogout";
+import { useRecoilValue } from "recoil";
+import userAtom from "../atoms/userAtom";
 
 export const SettingsPage = () => {
 	const showToast = useShowToast();
@@ -30,13 +32,17 @@ export const SettingsPage = () => {
 
 	return (
 		<>
-			<Text my={1} fontWeight={"bold"}>
-				Freeze Your Account
-			</Text>
-			<Text my={1}>You can unfreeze your account anytime by logging in.</Text>
-			<Button size={"sm"} colorScheme='red' onClick={freezeAccount}>
-				Freeze
-			</Button>
+			<Flex direction={"column"}>
+				<Box>
+					<Text my={1} fontWeight={"bold"}>
+						Freeze Your Account
+					</Text>
+					<Text my={1}>You can unfreeze your account anytime by logging in.</Text>
+					<Button size={"sm"} colorScheme='red' onClick={freezeAccount}>
+						Freeze
+					</Button>
+				</Box>
+			</Flex>
 		</>
 	);
 };

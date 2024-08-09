@@ -10,7 +10,8 @@ import userAtom from "./atoms/userAtom";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
 import CreatePost from "./components/CreatePost";
 import ChatPage from "./pages/ChatPage";
-import SettingsPage from "./pages/SettingsPage";
+import { SettingsPage } from "./pages/SettingsPage";
+import Footer from "./components/Footer";
 
 function App() {
   const user = useRecoilValue(userAtom);
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <Box position={"relative"} w={"full"}>
-      <Container maxW = {pathname === "/" ? {base: "620px", md: "900px"} : "620px"}>
+      <Container minH={"90vh"} maxW = {pathname === "/" ? {base: "620px", md: "900px"} : "620px"}>
         <Header/>
         <Routes>
           <Route path="/" element={user ? <HomePage/> : <Navigate to="/auth"/>}/>
@@ -37,6 +38,7 @@ function App() {
           <Route path="/settings" element={user ? <SettingsPage/> : <Navigate to="/auth"/>}/>
         </Routes>
       </Container>
+      <Footer/>
     </Box>
   )
 }

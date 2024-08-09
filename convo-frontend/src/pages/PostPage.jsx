@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Divider, Flex, Spinner, Image, Text } from "@chakra-ui/react";
-import Actions from "../components/Actions";
+import PostActions from "../components/PostActions";
 import Comment from "../components/Comment";
 import useGetUserProfile from "../hooks/useGetUserProfile";
 import useShowToast from "../hooks/useShowToast";
@@ -110,21 +110,24 @@ const PostPage = () => {
       )}
 
       <Flex gap={3} my={3}>
-        <Actions post={currentPost}/>
+        <PostActions post={currentPost}/>
       </Flex>
 
       <Divider my={4}/>
 
-      <Flex justifyContent={"space-between"}>
-        <Flex gap={2} alignItems={"center"}>
-          <Text fontSize={"2xl"}>👋</Text>
-          <Text color={"gray.light"}>Log In to post, like and reply.</Text>
+      {currentUser === null && (
+        <Flex justifyContent={"space-between"}>
+          <Flex gap={2} alignItems={"center"}>
+            <Text fontSize={"2xl"}>👋</Text>
+            <Text color={"gray.light"}>Log In to post, like and reply.</Text>
+          </Flex>
+          <Button>Log In</Button>
         </Flex>
-        <Button>Log In</Button>
-      </Flex>
+      )}
 
       <Divider my={4}/>
-      {currentPost.replies.map(reply => (
+
+      {currentPost.replies.map((reply) => (
         <Comment key={reply._id} reply={reply} lastReply={reply._id === currentPost.replies[currentPost.replies.length - 1]._id}/>
       ))}
     </>

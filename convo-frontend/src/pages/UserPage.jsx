@@ -8,7 +8,6 @@ import postsAtom from "../atoms/postsAtom";
 import useGetUserProfile from "../hooks/useGetUserProfile";
 import { useRecoilState } from "recoil";
 
-
 const UserPage = () => {
   const { user, loading } = useGetUserProfile();
   const showToast = useShowToast();

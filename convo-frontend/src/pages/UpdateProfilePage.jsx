@@ -98,16 +98,7 @@ export default function UpdateProfilePage() {
                     </Center>
                 </Stack>
                 </FormControl>
-                <FormControl>
-                <FormLabel>Username</FormLabel>
-                <Input
-                    placeholder="Username"
-                    _placeholder={{ color: 'gray.500' }}
-                    type="text"
-                    value={inputs.username} 
-                    onChange={(e) => setInputs((inputs) => ({ ...inputs, username: e.target.value}))}
-                />
-                </FormControl>
+
                 <HStack>
                     <Box>
                         <FormControl>
@@ -134,16 +125,7 @@ export default function UpdateProfilePage() {
                         </FormControl>
                     </Box>
                 </HStack>
-                <FormControl>
-                <FormLabel>Email address</FormLabel>
-                <Input
-                    placeholder="your-email@example.com"
-                    _placeholder={{ color: 'gray.500' }}
-                    type="email"
-                    value={inputs.email} 
-                    onChange={(e) => setInputs((inputs) => ({ ...inputs, email: e.target.value}))}
-                />
-                </FormControl>
+
                 <FormControl>
                 <FormLabel>Bio</FormLabel>
                 <Input
@@ -154,16 +136,7 @@ export default function UpdateProfilePage() {
                     onChange={(e) => setInputs((inputs) => ({ ...inputs, bio: e.target.value}))}
                 />
                 </FormControl>
-                <FormControl>
-                <FormLabel>Password</FormLabel>
-                <Input
-                    placeholder="password"
-                    _placeholder={{ color: 'gray.500' }}
-                    type="password"
-                    value={inputs.password} 
-                    onChange={(e) => setInputs((inputs) => ({ ...inputs, password: e.target.value}))}
-                />
-                </FormControl>
+
                 <Stack spacing={6} direction={['column', 'row']}>
                 <Button
                     bg={'red.400'}

@@ -1,6 +1,6 @@
 import { Avatar, Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
-import Actions from "./Actions";
+import PostActions from "./PostActions";
 import { useEffect, useState } from "react";
 import useShowToast from "../hooks/useShowToast";
 import { formatDistanceToNow } from "date-fns";
@@ -123,7 +123,7 @@ const Post = ({ post, postedBy }) => {
                     </Box>
                 )}
                 <Flex gap={3} my={1}>
-                    <Actions post={post}/>
+                    <PostActions post={post}/>
                 </Flex>
             </Flex>
         </Flex>

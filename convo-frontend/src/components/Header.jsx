@@ -12,17 +12,15 @@ const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Flex justifyContent={"space-between"} align={"center"} mt={"6"} mb={"12"}>
-
-      {user && (
+    <>
+      {user ? (
+        <Flex justifyContent={"space-between"} mt={"6"} mb={"12"}>
         <Link as={RouterLink} to={"/"}>
-          <AiFillHome size={"26"}/>
+            <AiFillHome size={"26"}/>
         </Link>
-      )}
-
-      <Image alt="logo" w={"7"} h={"7"} src={"/logoSM.png"}/>
-
-      {user && (
+  
+        <Image alt="logo" w={"7"} h={"7"} src={"/logoSM.png"}/>
+  
         <Menu>
           <MenuButton>
             <RxAvatar size={"26"} cursor={"pointer"}/>
@@ -44,9 +42,15 @@ const Header = () => {
             </MenuList>
           </Portal>
         </Menu>
-        )}
-
-    </Flex>
+      </Flex>
+      ) : (
+        <Flex display={"flex"} justifyContent={"center"} alignItems={"center"} mt={"6"} mb={"12"}>
+          <Link as={RouterLink} to={"/"}>
+            <Image alt="logo" w={"7"} h={"7"} src={"/logoSM.png"}/>
+          </Link>
+        </Flex>
+      )}
+    </>
 )}
 
 export default Header

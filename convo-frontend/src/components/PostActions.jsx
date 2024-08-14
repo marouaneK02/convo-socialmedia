@@ -12,6 +12,7 @@ import {
 	ModalHeader,
 	ModalOverlay,
 	Text,
+	useColorModeValue,
 	useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -33,12 +34,12 @@ const Actions = ({ post }) => {
 
 	const handleLikeUnlike = async () => {
 		if (!user){
-      return showToast("Error", "You must be logged in to like a post", "error");
-    };
+			return showToast("Error", "You must be logged in to like a post.", "error");
+		};
 
 		if (isLiking){
-      return;
-    };
+			return;
+		};
 
 		setIsLiking(true);
 
@@ -52,8 +53,8 @@ const Actions = ({ post }) => {
 
 			const data = await res.json();
 			if (data.error){
-        return showToast("Error", data.error, "error");
-    };
+        		return showToast("Error", data.error, "error");
+    		};
 
 			if (!liked) {
 				const updatedPosts = posts.map((p) => {
@@ -85,12 +86,12 @@ const Actions = ({ post }) => {
 
 	const handleReply = async () => {
 		if (!user) {
-      return showToast("Error", "You must be logged in to reply to a post", "error")
-    };
+      		return showToast("Error", "You must be logged in to reply to a post.", "error")
+    	};
 
 		if (isReplying){
-      return;
-    }
+      		return;
+    	};
 
 		setIsReplying(true);
 
@@ -105,8 +106,8 @@ const Actions = ({ post }) => {
 
 			const data = await res.json();
 			if (data.error){
-        return showToast("Error", data.error, "error");
-      };
+				return showToast("Error", data.error, "error");
+      		};
 
 			const updatedPosts = posts.map((p) => {
 				if (p._id === post._id) {
@@ -185,7 +186,7 @@ const Actions = ({ post }) => {
 
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
-				<ModalContent>
+				<ModalContent bg={useColorModeValue('white', 'gray.dark')}>
 					<ModalHeader></ModalHeader>
 					<ModalCloseButton />
 					<ModalBody pb={6}>
@@ -199,7 +200,7 @@ const Actions = ({ post }) => {
 					</ModalBody>
 
 					<ModalFooter>
-						<Button colorScheme='blue' size={"sm"} mr={3} isLoading={isReplying} onClick={handleReply}>
+						<Button colorScheme='blue' size={"sm"} mr={"3"} isLoading={isReplying} onClick={handleReply}>
 							Reply
 						</Button>
 					</ModalFooter>

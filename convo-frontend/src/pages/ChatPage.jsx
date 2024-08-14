@@ -69,6 +69,12 @@ const ChatPage = () => {
     e.preventDefault();
     setSearchingUser(true);
 
+    if(searchText === ""){
+      showToast("Error", "Username can't be empty.", "error");
+      setSearchingUser(false);
+      return;
+    }
+
     try {
       const res = await fetch(`/api/users/profile/${searchText}`);
       const data = await res.json();

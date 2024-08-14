@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import UserHeader from "../components/UserHeader";
 import { useParams } from "react-router-dom";
 import useShowToast from "../hooks/useShowToast";
-import { Flex, Spinner } from "@chakra-ui/react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import Post from "../components/Post";
 import postsAtom from "../atoms/postsAtom";
 import useGetUserProfile from "../hooks/useGetUserProfile";
 import { useRecoilState } from "recoil";
+import { TfiFaceSad } from "react-icons/tfi";
 
 const UserPage = () => {
   const { user, loading } = useGetUserProfile();
@@ -51,7 +52,19 @@ const UserPage = () => {
   };
 
   if(!user && !loading){
-    return <h1>User not found.</h1>;
+    return (
+      <Flex flex={"70"} 
+      borderRadius={"md"} 
+      p={"2"} 
+      flexDirection={"column"} 
+      alignItems={"center"} 
+      justifyContent={"center"} 
+      height={"400px"}
+      gap={"6"}>
+        <TfiFaceSad size={"100"}/>
+        <Text fontSize={"20"}> User not found.</Text>
+      </Flex>
+  );
   };
 
   return (
@@ -59,7 +72,17 @@ const UserPage = () => {
       <UserHeader user={user}/>
 
       {!fetchingPosts && posts.length === 0 && (
-        <h1>User has not posted yet.</h1>
+        <Flex flex={"70"} 
+        borderRadius={"md"} 
+        p={"2"} 
+        flexDirection={"column"} 
+        alignItems={"center"} 
+        justifyContent={"center"} 
+        height={"400px"}
+        gap={"6"}>
+          <TfiFaceSad size={"100"}/>
+          <Text fontSize={"20"}> User has not posted yet.</Text>
+        </Flex>
       )}
       {fetchingPosts && (
         <Flex justifyContent={"center"} my={"12"}>

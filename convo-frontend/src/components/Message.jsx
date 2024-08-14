@@ -24,14 +24,14 @@ const Message = ({ message, ownMessage }) => {
           )}
 
           {message.img && !imgLoaded && (
-            <Flex mt={"5"} w={"200px"}>
+            <Flex w={"200px"}>
               <Image src={message.img} hidden onLoad={() => setImgLoaded(true)} alt='Message image' borderRadius={"4"}/>
               <Skeleton w={"200px"} h={"200px"}/>
             </Flex>
           )}
           {message.img && imgLoaded && (
-            <Flex mt={"5"} w={"200px"}>
-              <Image src={message.img} alt='Message image' borderRadius={"4"}/>
+            <Flex w={"200px"}>
+              <Image bg={"green.800"} p={"2"} src={message.img} alt='Message image' borderRadius={"4"}/>
               <Box alignSelf={"flex-end"} ml={"1"} color={message.seen ? "blue.400" : ""} fontWeight={"bold"}>
                 <BsCheck2All size={"16"}/>
               </Box>
@@ -51,14 +51,14 @@ const Message = ({ message, ownMessage }) => {
           )}
 
           {message.img && !imgLoaded && (
-            <Flex mt={"5"} w={"200px"}>
+            <Flex w={"200px"}>
               <Image src={message.img} hidden onLoad={() => setImgLoaded(true)} alt='Message image' borderRadius={"4"}/>
               <Skeleton w={"200px"} h={"200px"}/>
             </Flex>
           )}
           {message.img && imgLoaded && (
-            <Flex mt={"5"} w={"200px"}>
-              <Image src={message.img} alt='Message image' borderRadius={"4"}/>
+            <Flex w={"200px"}>
+              <Image bg={"gray.400"} p={"2"} src={message.img} alt='Message image' borderRadius={"4"}/>
             </Flex>
           )}
         </Flex>

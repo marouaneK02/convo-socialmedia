@@ -31,15 +31,14 @@ const useFollowUnfollow = (user) => {
 			}
 
 			if (following) {
-				showToast("Success", `Unfollowed ${user.name}`, "success");
-				user.followers.pop(); // simulate removing from followers
+				showToast("Success", `Unfollowed ${user.username}`, "success");
+				user.followers.pop();
 			} else {
-				showToast("Success", `Followed ${user.name}`, "success");
-				user.followers.push(currentUser?._id); // simulate adding to followers
+				showToast("Success", `Followed ${user.username}`, "success");
+				user.followers.push(currentUser?._id);
 			}
 			setFollowing(!following);
 
-			console.log(data);
 		} catch (error) {
 			showToast("Error", error, "error");
 		} finally {

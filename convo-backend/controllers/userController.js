@@ -46,7 +46,7 @@ const getSuggestedUsers = async (req, res) => {
 		]);
 
 		const filteredUsers = users.filter((user) => !usersFollowedByYou.following.includes(user._id));
-		const suggestedUsers = filteredUsers.slice(0, 4);
+		const suggestedUsers = filteredUsers.slice(0, 6);
 
 		suggestedUsers.forEach((user) => (user.password = null));
 
@@ -198,7 +198,7 @@ const updateUser = async(req,res) => {
         };
 
         if(password){
-            const salt = bcrypt.getSalt(10);
+            const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password,salt);
             user.password = hashedPassword;
         };
@@ -225,7 +225,7 @@ const updateUser = async(req,res) => {
             {"replies.userId": userId},
             {$set:{
                 "replies.$[reply].username": user.username,
-                "replies.$[reply].userProfilePic": user.ProfilePic,
+                "replies.$[reply].userProfilePic": user.profilePic,
             }},
             {arrayFilters:[{"reply.userId": userId}]}
         );

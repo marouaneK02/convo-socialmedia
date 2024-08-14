@@ -1,4 +1,4 @@
-import { Flex, Image, Input, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner, useDisclosure } from '@chakra-ui/react';
+import { Flex, Image, Input, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spinner, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { IoSendSharp } from "react-icons/io5";
 import useShowToast from '../hooks/useShowToast';
@@ -98,7 +98,7 @@ const MessageInput = ({ setMessages }) => {
         setImgUrl("");
       }}>
         <ModalOverlay/>
-        <ModalContent>
+        <ModalContent bg={useColorModeValue('white', 'gray.dark')}>
           <ModalHeader></ModalHeader>
           <ModalCloseButton/>
           <ModalBody>
@@ -106,7 +106,7 @@ const MessageInput = ({ setMessages }) => {
               <Image src={imgUrl}/>
             </Flex>
 
-            <Flex justifyContent={"flex-end"} my={"2"}>
+            <Flex justifyContent={"flex-end"} my={"5"}>
               {!sending ? (
                 <IoSendSharp size={"24"} cursor={"pointer"} onClick={handleSendMessage}/>
               ) : (

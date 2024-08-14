@@ -63,8 +63,8 @@ export default function LoginCard() {
   return (
     <Flex
       align={'center'}
-      justify={'center'}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+      justify={'center'} py={"20"}>
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={"12"} px={"6"}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
             Log In
@@ -101,7 +101,7 @@ export default function LoginCard() {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-            <Stack spacing={10} pt={2}>
+            <Stack spacing={"10"} pt={"2"}>
               <Button
                 loadingText="Logging in"
                 size="lg"

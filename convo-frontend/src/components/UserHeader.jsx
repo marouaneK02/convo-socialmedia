@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Portal, Text, VStack, useToast } from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, Image, Link, Menu, MenuButton, MenuItem, MenuList, Portal, Text, VStack, useToast } from "@chakra-ui/react";
 import { CgMoreO } from "react-icons/cg";
 import { useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
@@ -22,23 +22,28 @@ const UserHeader = ({ user }) => {
     };
 
   return (
-    <VStack gap={4} alignItems={"start"}>
+    <VStack gap={"4"} alignItems={"start"}>
         <Flex justifyContent={"space-between"} w={"full"}>
             <Box>
-                <Text fontSize={"2xl"} fontWeight={"bold"}>{user.firstName} {user.lastName}</Text>
-                <Flex gap={2} alignItems={"center"}>
-                    <Text fontSize={"sm"}>{user.username}</Text>
+                <Flex alignItems={"center"} gap={"2"}>
+                    <Text fontSize={"2xl"} fontWeight={"bold"}>{user.firstName} {user.lastName}</Text>
+                    {user.isVerified && (
+                        <Image src='/verified.png' w={"5"} h={"5"}/>
+                    )}
+                </Flex>
+                <Flex alignItems={"center"} mt={"1"}>
+                    <Text fontSize={"sm"} bg={"gray.dark"} px={"2"} py={"1"} borderRadius={"full"}>{user.username}</Text>
                 </Flex>
             </Box>
             <Box>
                 {user.profilePic && (
-                    <Avatar name={user.firstName} src={user.profilePic} size={{
+                    <Avatar name={user.username} src={user.profilePic} size={{
                         base: 'lg',
                         md: 'xl',
                     }}/>
                 )}
                 {!user.profilePic && (
-                    <Avatar name={user.firstName} size={{
+                    <Avatar name={user.username} size={{
                         base: 'lg',
                         md: 'xl',
                     }}/>
@@ -76,13 +81,8 @@ const UserHeader = ({ user }) => {
             </Flex>
         </Flex>
 
-        <Flex w={"full"}>
-            <Flex flex={1} borderBottom={"1.5px solid white"} justifyContent={"center"} pb={3} cursor={"pointer"}>
-                <Text fontWeight={"bold"}>Posts</Text>
-            </Flex>
-            <Flex flex={1} borderBottom={"1px solid gray"} color={"gray.light"} justifyContent={"center"} pb={3} cursor={"pointer"}>
-                <Text fontWeight={"bold"}>Replies</Text>
-            </Flex>
+        <Flex w={"full"} flex={1} borderBottom={"1.5px solid white"} justifyContent={"center"} pb={3} cursor={"pointer"}>
+            <Text fontSize={"19"} fontWeight={"bold"}>Posts</Text>
         </Flex>
     </VStack>
   )

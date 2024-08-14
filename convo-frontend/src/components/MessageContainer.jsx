@@ -119,7 +119,9 @@ const MessageContainer = () => {
             <Avatar src={selectedConversation.userProfilePic} size={"sm"}/>
             <Text display={"flex"} alignItems={"center"}>
                 {selectedConversation.username}
-                <Image src='stockIMG.jpg' w={"4"} h={"4"} ml={"1"}/>
+                {selectedConversation.isVerified && (
+                    <Image src='/verified.png' w={"4"} h={"4"} ml={"1"}/>
+                )}
             </Text>
         </Flex>
 

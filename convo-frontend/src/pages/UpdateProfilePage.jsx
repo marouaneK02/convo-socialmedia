@@ -75,7 +75,8 @@ export default function UpdateProfilePage() {
             <Flex
             align={'center'}
             justify={'center'}
-            my={"6"}>
+            my={"20"}
+            py={"20"}>
             <Stack
                 spacing={4}
                 w={'full'}

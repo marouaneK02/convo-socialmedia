@@ -11,7 +11,7 @@ async function getConversations(req,res){
             participants: userId,
         }).populate({
             path: "participants",
-            select: "username profilePic",
+            select: "username profilePic isVerified",
         });
 
         conversations.forEach(conversation => {

@@ -21,6 +21,7 @@ const Conversation = ({ conversation, isOnline }) => {
         userId: user._id,
         username: user.username,
         userProfilePic: user.profilePic,
+        isVerified: user.isVerified,
         mock: conversation.mock,
     })} bg={selectedConversation?._id === conversation._id ? (colorMode === "light" ? "gray.600" : "gray.dark") : ""}>
         <WrapItem>
@@ -34,10 +35,14 @@ const Conversation = ({ conversation, isOnline }) => {
         </WrapItem>
         
         <Stack direction={"column"} fontSize={"sm"}>
-            <Text fontWeight={"700"} display={"flex"} alignItems={"center"}>
-                {user.username}
-                <Image src='stockIMG.jpg' w={"4"} h={"4"} ml={"1"}/>
-            </Text>
+            <Flex alignItems={"center"}>
+                <Text fontWeight={"700"} display={"flex"} alignItems={"center"}>
+                    {user.username}
+                </Text>
+                {user.isVerified && (
+                    <Image src='/verified.png' w={"4"} h={"4"} ml={"1"}/>
+                )}
+            </Flex>
             <Text fontSize={"xs"} display={"flex"} alignItems={"center"} gap={"1"}>
                 {currentUser._id === lastMessage.sender ? (
                     <Box color={lastMessage.seen ? "blue.400" : ""}>

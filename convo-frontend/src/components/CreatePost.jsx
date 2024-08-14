@@ -80,20 +80,20 @@ const CreatePost = () => {
     return (
         <>
             <Button 
-            position={"fixed"} 
-            bottom={"10"} 
-            right={"5"} 
+            position={"fixed"}
+            bottom={"20"} 
+            right={"20"}
             bg={useColorModeValue("gray.300", "gray.dark")} 
             onClick={onOpen}
-            size={{base:"sm", sm:"md"}}>
+            size={{base:"md", sm:"lg"}}>
                 <AddIcon/>
             </Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
 
-                <ModalContent>
-                    <ModalHeader>Create Post</ModalHeader>
+                <ModalContent bg={useColorModeValue('white', 'gray.dark')}>
+                    <ModalHeader fontSize={"2xl"}>Create Post</ModalHeader>
                     <ModalCloseButton />
 
                     <ModalBody pb={"6"}>
@@ -106,7 +106,7 @@ const CreatePost = () => {
                             fontWeight={"bold"} 
                             textAlign={"right"} 
                             m={"1"} 
-                            color={"gray.800"}>
+                            color={"gray.100"}>
                                 {remainingChar}/{MAX_CHAR}</Text>
                             <Input type="file" hidden ref={fileRef} onChange={handleImgChange}/>
                             <BsFillImageFill 
@@ -130,7 +130,7 @@ const CreatePost = () => {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={handleCreatePost} isLoading={loading}>
+                        <Button colorScheme='blue' mr={"3"} onClick={handleCreatePost} isLoading={loading}>
                             Post
                         </Button>
                     </ModalFooter>

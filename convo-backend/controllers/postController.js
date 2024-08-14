@@ -118,7 +118,7 @@ const replyPost = async(req,res) => {
         const postId = req.params.id;
         const userId = req.user._id;
         const userProfilePic = req.user.profilePic;
-        const username = req.username;
+        const username = req.user.username;
 
         if(!text){
             return res.status(400).json({ error: "Text field is required." });

@@ -28,8 +28,8 @@ export default function LoginCard() {
   const [loading, setLoading] = useState(false);
 
   const [inputs, setInputs] = useState({
-    username:"",
-    password:"",
+    username:"johnSmith",
+    password:"123456",
   });
 
   const handleLogin = async() => {

@@ -56,7 +56,7 @@ const SuggestedUsers = () => {
 								<Skeleton h={"20px"} w={"60px"} />
 							</Flex>
 						</Flex>
-					))}
+				))}
 			</Flex>
 		</>
 	);

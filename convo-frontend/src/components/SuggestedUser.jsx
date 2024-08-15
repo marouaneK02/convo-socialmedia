@@ -20,7 +20,7 @@ const SuggestedUser = ({ user }) => {
                     	)}
 					</Flex>
 					<Text color={"gray.light"} fontSize={"sm"}>
-						{user.name}
+						{user.firstName} {user.lastName}
 					</Text>
 				</Box>
 			</Flex>

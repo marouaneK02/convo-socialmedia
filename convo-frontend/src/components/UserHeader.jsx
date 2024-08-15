@@ -62,14 +62,14 @@ const UserHeader = ({ user }) => {
             <Button size={"sm"} onClick={handleFollowUnfollow} isLoading={updating}>{following ? "Unfollow" : "Follow"}</Button>
         )}
         <Flex w={"full"} justifyContent={"space-between"}>
-            <Flex gap={2} alignItems={"center"}>
+            <Flex gap={"2"} alignItems={"center"}>
                 <Text color={"gray.light"}>{user.followers.length} followers</Text>
             </Flex>
             <Flex>
                 <Box className="icon-container">
                     <Menu>
                         <MenuButton>
-                            <CgMoreO size={24} cursor={"pointer"}/>
+                            <CgMoreO size={"24"} cursor={"pointer"}/>
                         </MenuButton>
                         <Portal>
                             <MenuList bg={"gray.dark"}>
@@ -81,7 +81,7 @@ const UserHeader = ({ user }) => {
             </Flex>
         </Flex>
 
-        <Flex w={"full"} flex={1} borderBottom={"1.5px solid white"} justifyContent={"center"} pb={3} cursor={"pointer"}>
+        <Flex w={"full"} flex={"1"} borderBottom={"1.5px solid white"} justifyContent={"center"} pb={3} cursor={"pointer"}>
             <Text fontSize={"19"} fontWeight={"bold"}>Posts</Text>
         </Flex>
     </VStack>

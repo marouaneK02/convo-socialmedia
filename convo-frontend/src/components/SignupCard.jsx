@@ -64,7 +64,7 @@ export default function SignupCard() {
     <Flex
       align={'center'}
       justify={'center'}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+      <Stack spacing={"8"} mx={'auto'} maxW={'lg'} py={"12"} px={"6"}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
             Sign up
@@ -121,7 +121,7 @@ export default function SignupCard() {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-            <Stack spacing={10} pt={2}>
+            <Stack spacing={"10"} pt={"2"}>
               <Button
                 loadingText="Submitting"
                 size="lg"

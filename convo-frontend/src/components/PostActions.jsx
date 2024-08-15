@@ -130,7 +130,7 @@ const Actions = ({ post }) => {
 
 	return (
 		<Flex flexDirection='column'>
-			<Flex gap={3} my={2} onClick={(e) => e.preventDefault()}>
+			<Flex gap={"3"} my={"2"} onClick={(e) => e.preventDefault()}>
 				<svg
 					aria-label='Like'
 					color={liked ? "rgb(237, 73, 86)" : ""}
@@ -174,11 +174,11 @@ const Actions = ({ post }) => {
 				<ShareSVG/>
 			</Flex>
 
-			<Flex gap={2} alignItems={"center"}>
+			<Flex gap={"2"} alignItems={"center"}>
 				<Text color={"gray.light"} fontSize='sm'>
 					{post.replies.length} replies
 				</Text>
-				<Box w={0.5} h={0.5} borderRadius={"full"} bg={"gray.light"}></Box>
+				<Box w={"0.5"} h={"0.5"} borderRadius={"full"} bg={"gray.light"}></Box>
 				<Text color={"gray.light"} fontSize='sm'>
 					{post.likes.length} likes
 				</Text>
@@ -189,7 +189,7 @@ const Actions = ({ post }) => {
 				<ModalContent bg={useColorModeValue('white', 'gray.dark')}>
 					<ModalHeader></ModalHeader>
 					<ModalCloseButton />
-					<ModalBody pb={6}>
+					<ModalBody pb={"6"}>
 						<FormControl>
 							<Input
 								placeholder='Reply goes here..'

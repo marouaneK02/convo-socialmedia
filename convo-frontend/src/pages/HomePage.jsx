@@ -39,7 +39,7 @@ const HomePage = () => {
 
   return (
 		<Flex gap='10' alignItems={"flex-start"}>
-			<Box flex={70}>
+			<Box flex={"70"}>
 				{!loading && posts.length === 0 && (
           <Flex flex={"70"} 
           borderRadius={"md"} 
@@ -65,7 +65,7 @@ const HomePage = () => {
 				))}
 			</Box>
 			<Box
-				flex={30}
+				flex={"30"}
 				display={{
 					base: "none",
 					md: "block",

@@ -78,7 +78,7 @@ export default function UpdateProfilePage() {
             my={"20"}
             py={"20"}>
             <Stack
-                spacing={4}
+                spacing={"4"}
                 w={'full'}
                 maxW={'md'}
                 bg={useColorModeValue('white', 'gray.dark')}
@@ -89,7 +89,7 @@ export default function UpdateProfilePage() {
                 User Profile Edit
                 </Heading>
                 <FormControl>
-                <Stack direction={['column', 'row']} spacing={6}>
+                <Stack direction={['column', 'row']} spacing={"6"}>
                     <Center>
                         <Avatar size="xl" boxShadow={"md"} src={imgUrl || user.profilePic}/>
                     </Center>

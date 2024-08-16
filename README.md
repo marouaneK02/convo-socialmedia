@@ -1,6 +1,6 @@
 # convo
 
-Full Stack Social Media Site with Real Time Chat App using the MERN stack and Socket.IO.
+Full Stack social media site with real-time chat app using the MERN stack and Socket.IO.
 
 
 ### Languages and Tools used
